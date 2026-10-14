@@ -22,3 +22,5 @@ def summary(scores: list[float]) -> dict[str, float]:
     return res
 
 print(summary([7.5, 9, 6, 8]))
+
+# LOL
