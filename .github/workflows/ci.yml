@@ -35,18 +35,14 @@ jobs:
             lam_ns)    VARIANT=3 ;;
             minh_hq)   VARIANT=4 ;;
             *)
-              VARIANT=""
+              echo "No W1-4 variant assigned to $MEMBER"
+              exit 1
               ;;
           esac
 
           python -m ruff check "members/$MEMBER"
-
-          if [ -n "$VARIANT" ]; then
-            python -m pytest -q tests/test_w1.py::test_w1_4_translate \
-              --member "$MEMBER" \
-              --variant "$VARIANT"
-          else
-            echo "$MEMBER is not assigned W1-4; skipping its test"
-          fi
+          python -m pytest -q tests/test_w1.py::test_w1_4_translate \
+            --member "$MEMBER" \
+            --variant "$VARIANT"
 
           ! git grep -n -E '^(<<<<<<<|=======|>>>>>>>)' -- "members/$MEMBER"
