@@ -7,6 +7,8 @@ def summary(scores: list[float]) -> dict[str, float]:
     if n == 0:
         raise ValueError("LOL SUMMARY WHAT FROM THIS KINDA LIST?")
 
+    scores = sorted(scores)
+
     res["min"] = min(scores)
     res["max"] = max(scores)
     res["mean"] = sum(scores) / n

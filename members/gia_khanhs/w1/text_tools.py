@@ -1,0 +1,25 @@
+from collections import defaultdict
+import string
+
+def word_count(text: str) -> dict[str, int]:
+    res: dict[str, int] = defaultdict(int)
+
+    text = "".join([char
+            for char in text
+            if char not in string.punctuation]).lower()
+
+    for word in text.split():
+        res[word] += 1
+
+    return dict(res)
+    raise NotImplemented
+
+def top_k(text: str, k: int) -> list[tuple[str, int]]:
+    word_cnt_dict: dict[str, int] = word_count(text)
+    word_cnt_list: list[tuple[str, int]] = [(key, val)
+                                            for key, val in word_cnt_dict.items()]
+
+    word_cnt_list = sorted(word_cnt_list, key=lambda word: word[1], reverse=True)
+
+    return word_cnt_list[:k]
+    raise NotImplemented
