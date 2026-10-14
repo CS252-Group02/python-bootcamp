@@ -10,5 +10,3 @@ def by_day(timetable: list[tuple[str, str]]) -> dict:
         res[day] = sorted(courses)
 
     return dict(res)
-
-    raise NotImplemented

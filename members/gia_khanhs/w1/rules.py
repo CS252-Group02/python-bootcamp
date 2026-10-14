@@ -4,8 +4,6 @@ def can_register_thesis(credits: int, gpa: float) -> bool:
 
     return False
 
-    raise NotImplemented
-
 def  missing(credits, gpa) -> list[str]:
     missings: list[str] = []
 
@@ -16,5 +14,3 @@ def  missing(credits, gpa) -> list[str]:
         missings.append(f"yo u cannot do a thesis with a gpa of {gpa}, either improve it or register for Grab instead!")
 
     return missings
-
-    raise NotImplemented

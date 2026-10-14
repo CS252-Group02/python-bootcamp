@@ -12,7 +12,6 @@ def word_count(text: str) -> dict[str, int]:
         res[word] += 1
 
     return dict(res)
-    raise NotImplemented
 
 def top_k(text: str, k: int) -> list[tuple[str, int]]:
     word_cnt_dict: dict[str, int] = word_count(text)
@@ -22,4 +21,3 @@ def top_k(text: str, k: int) -> list[tuple[str, int]]:
     word_cnt_list = sorted(word_cnt_list, key=lambda word: word[1], reverse=True)
 
     return word_cnt_list[:k]
-    raise NotImplemented
