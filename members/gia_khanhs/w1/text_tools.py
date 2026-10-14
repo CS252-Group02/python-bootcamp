@@ -1,5 +1,6 @@
-from collections import defaultdict
 import string
+from collections import defaultdict
+
 
 def word_count(text: str) -> dict[str, int]:
     res: dict[str, int] = defaultdict(int)

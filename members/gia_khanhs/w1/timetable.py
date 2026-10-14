@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 def by_day(timetable: list[tuple[str, str]]) -> dict:
     res: dict[str, list[str]] = defaultdict(list[str])
 

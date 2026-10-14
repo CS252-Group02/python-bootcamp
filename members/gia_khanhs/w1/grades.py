@@ -1,5 +1,6 @@
 import math
 
+
 def summary(scores: list[float]) -> dict[str, float]:
     res: dict[str, float] = {}
     n: int = len(scores)
