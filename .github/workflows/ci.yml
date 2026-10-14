@@ -30,10 +30,10 @@ jobs:
           fi
 
           case "$MEMBER" in
-            khanh_ph)  VARIANT=1 ;;
-            nghia_ltd) VARIANT=2 ;;
-            lam_ns)    VARIANT=3 ;;
-            minh_hq)   VARIANT=4 ;;
+            khanh47)  VARIANT=1 ;;
+            nghiale29_coder) VARIANT=2 ;;
+            Slampanda)    VARIANT=3 ;;
+            conmefo)   VARIANT=4 ;;
             *)
               VARIANT=""
               ;;
