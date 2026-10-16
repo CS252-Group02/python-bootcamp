@@ -33,10 +33,10 @@ jobs:
           fi
 
           case "$MEMBER" in
-            khanh47)          VARIANT=1 ;;
-            nghiale29_coder)  VARIANT=2 ;;
-            Slampanda)        VARIANT=3 ;;
-            conmefo)          VARIANT=4 ;;
+            khanh47)  VARIANT=1 ;;
+            nghiale29_coder) VARIANT=2 ;;
+            Slampanda)    VARIANT=3 ;;
+            conmefo)   VARIANT=4 ;;
             *)
               echo "No W1-4 variant assigned to $MEMBER"
               exit 1
