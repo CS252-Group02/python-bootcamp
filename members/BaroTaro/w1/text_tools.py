@@ -1,6 +1,7 @@
 def word_count(text: str) -> dict[str, int]:
     punctuation = ".,?!;:"
     text = text.lower()
+
     for char in punctuation:
         text = text.replace(char, " ")
     
@@ -14,7 +15,7 @@ def word_count(text: str) -> dict[str, int]:
     return counts
 
 def top_k(text: str, k: int ) -> list[tuple[str,int]]:
-    counts = word_count(str)
+    counts = word_count(text)
 
     items = list(counts.items())
 
