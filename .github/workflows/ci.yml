@@ -1,12 +1,12 @@
 name: CI
 
 on:
-  push:
-    branches-ignore: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   test:
-    name: Pusher tests
+    name: PR author tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,17 +18,27 @@ jobs:
 
       - run: python -m pip install -r requirements.txt
 
-      - name: Test the GitHub pusher
+      - name: Resolve the PR author's member folder
         env:
-          ACTOR: ${{ github.actor }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
         run: |
-          MEMBER="${ACTOR//-/_}"
+          # The actor can be a reviewer; homework belongs to the PR author.
+          MEMBER="${PR_AUTHOR//-/_}"
 
           if [ ! -d "members/$MEMBER" ]; then
             echo "No member folder found: members/$MEMBER"
             exit 1
           fi
 
+          echo "MEMBER=$MEMBER" >> "$GITHUB_ENV"
+
+      - name: Lint and check conflict markers
+        run: |
+          python -m ruff check "members/$MEMBER"
+          ! git grep -n -E '^(<<<<<<<|=======|>>>>>>>)' -- "members/$MEMBER"
+
+      - name: Test week 1 translation assignment
+        run: |
           case "$MEMBER" in
             khanh47)  VARIANT=1 ;;
             nghiale29_coder) VARIANT=2 ;;
@@ -39,8 +49,6 @@ jobs:
               ;;
           esac
 
-          python -m ruff check "members/$MEMBER"
-
           if [ -n "$VARIANT" ]; then
             python -m pytest -q tests/test_w1.py::test_w1_4_translate \
               --member "$MEMBER" \
@@ -49,4 +57,5 @@ jobs:
             echo "$MEMBER is not assigned W1-4; skipping its test"
           fi
 
-          ! git grep -n -E '^(<<<<<<<|=======|>>>>>>>)' -- "members/$MEMBER"
+      - name: Test week 2 homework
+        run: python -m pytest -q tests/test_w2.py --member "$MEMBER"
