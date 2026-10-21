@@ -1,3 +1,4 @@
+# ruff: noqa: N999
 """
 python -m pytest -q members/gia_khanhs/w2/tests_for_BaroTaro.py
 """

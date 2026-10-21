@@ -1,13 +1,14 @@
-from .models import Task
-from pathlib import Path
-from datetime import date
 import csv
 import json
+from datetime import date
+from pathlib import Path
+
+from .models import Task
 
 
 def tasks_by_reader(reader) -> list[Task]:
     tasks = []
-    temp_header = next(reader)
+    next(reader)
 
     id: int = 1
 
@@ -19,7 +20,7 @@ def tasks_by_reader(reader) -> list[Task]:
             numeric_row[1] = int(row[1])
             numeric_row[2] = float(row[2])
             numeric_row[3] = date.fromisoformat(row[3])
-        except:
+        except ValueError:
             raise ValueError(f"value error in line {id}")
 
         tasks.append(Task(*numeric_row))

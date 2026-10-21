@@ -1,6 +1,6 @@
 from pathlib import Path
+
 from .io_utils import load_tasks
-from .models import Task
 
 
 def main():
