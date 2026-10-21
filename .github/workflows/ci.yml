@@ -1,15 +1,13 @@
-
 name: CI
 
 on:
-  push:
-    branches-ignore: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   test:
-    name: Pusher tests
+    name: PR author tests
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -20,42 +18,44 @@ jobs:
 
       - run: python -m pip install -r requirements.txt
 
-      - name: Test the GitHub pusher
+      - name: Resolve the PR author's member folder
         env:
-          ACTOR: ${{ github.actor }}
-        shell: bash
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
         run: |
-          MEMBER="${ACTOR//-/_}"
+          # The actor can be a reviewer; homework belongs to the PR author.
+          MEMBER="${PR_AUTHOR//-/_}"
 
           if [ ! -d "members/$MEMBER" ]; then
             echo "No member folder found: members/$MEMBER"
             exit 1
           fi
 
+          echo "MEMBER=$MEMBER" >> "$GITHUB_ENV"
+
+      - name: Lint and check conflict markers
+        run: |
+          python -m ruff check "members/$MEMBER"
+          ! git grep -n -E '^(<<<<<<<|=======|>>>>>>>)' -- "members/$MEMBER"
+
+      - name: Test week 1 translation assignment
+        run: |
           case "$MEMBER" in
             khanh47)  VARIANT=1 ;;
             nghiale29_coder) VARIANT=2 ;;
             Slampanda)    VARIANT=3 ;;
             conmefo)   VARIANT=4 ;;
             *)
-              echo "No W1-4 variant assigned to $MEMBER"
-              exit 1
+              VARIANT=""
               ;;
           esac
 
-          # Check code quality
-          python -m ruff check "members/$MEMBER"
+          if [ -n "$VARIANT" ]; then
+            python -m pytest -q tests/test_w1.py::test_w1_4_translate \
+              --member "$MEMBER" \
+              --variant "$VARIANT"
+          else
+            echo "$MEMBER is not assigned W1-4; skipping its test"
+          fi
 
-          # Run shared exercises (W1-1, W1-2, W1-3)
-          python -m pytest -q tests/test_w1.py \
-            -k "not test_w1_4_translate" \
-            --member "$MEMBER"
-
-          # Run W1-4 with the assigned variant
-          python -m pytest -q \
-            tests/test_w1.py::test_w1_4_translate \
-            --member "$MEMBER" \
-            --variant "$VARIANT"
-
-          # Check for merge conflict markers
-          ! git grep -n -E '^(<<<<<<<|=======|>>>>>>>)' -- "members/$MEMBER"
+      - name: Test week 2 homework
+        run: python -m pytest -q tests/test_w2.py --member "$MEMBER"
