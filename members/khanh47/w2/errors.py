@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
-
 @dataclass
 class InfeasiblePlan(Exception):
     needed_h: float
