@@ -17,6 +17,10 @@ def test_word_count_normalizes_case_and_punctuation():
     }
 
 
+def test_word_count_returns_empty_mapping_for_punctuation_only_input():
+    assert text_tools.word_count("... !!! ???") == {}
+
+
 def test_top_k_returns_no_results_when_k_is_zero():
     assert text_tools.top_k("one two", 0) == []
 
