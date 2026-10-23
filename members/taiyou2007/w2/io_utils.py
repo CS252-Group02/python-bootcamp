@@ -41,7 +41,7 @@ def load_tasks(path: str | Path) -> list[Task]:
                 tasks.append(task)
 
             except (ValueError, TypeError) as e:
-                raise ValueError(f"Line {line_num}: {e}") from e
+                raise ValueError(f"line {line_num}: {e}") from e
 
     return tasks
 
