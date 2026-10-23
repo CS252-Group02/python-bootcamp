@@ -1,4 +1,5 @@
 import pytest
+
 from members.taiyou2007.w1.grades import summary
 from members.taiyou2007.w1.rules import can_register_thesis, missing
 from members.taiyou2007.w1.text_tools import top_k, word_count
