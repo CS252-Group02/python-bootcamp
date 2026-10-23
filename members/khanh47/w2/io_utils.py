@@ -7,6 +7,9 @@ from .models import Task
 
 
 def load_tasks(path) -> list[Task]:
+    # if (!path.exists() or !path.isFile())
+    #     return []
+
     tasks: list[Task] = []
 
     with path.open("r", newline = "") as file:
