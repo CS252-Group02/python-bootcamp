@@ -4,7 +4,6 @@ from dataclasses import asdict, is_dataclass
 from datetime import date
 from pathlib import Path
 
-
 try:
     from .models import Task
 except (ImportError, ValueError):
