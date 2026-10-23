@@ -57,5 +57,10 @@ jobs:
             echo "$MEMBER is not assigned W1-4; skipping its test"
           fi
 
+      - name: Check shared allocator
+        run: |
+          python -m ruff check shared/contract.py shared/study_planner/allocate.py tests/test_allocate.py
+          python -m pytest -q tests/test_allocate.py
+
       - name: Test week 2 homework
         run: python -m pytest -q tests/test_w2.py --member "$MEMBER"
