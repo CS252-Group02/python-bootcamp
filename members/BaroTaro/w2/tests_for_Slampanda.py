@@ -1,7 +1,3 @@
-from datetime import date
-
-import pytest
-
 from members.Slampanda.w1 import grades, rules, text_tools, timetable, translate
 
 
