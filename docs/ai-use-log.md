@@ -23,3 +23,14 @@
   execution smoke test. All passed (18 pytest cases).
 - Member review: the member still needs to read and understand the generated
   implementation; automated checks are not a substitute for personal review.
+
+## conmefo — individual Python W3
+
+- AI assistant: Claude Code.
+- Assistance: wrote W3-1 `parse_due`, W3-2 `analyse`, and the W3-3 study planner
+  CLI in `members/conmefo/w3/`; for W3-4 added type hints and docstrings to the
+  member's W1 and W2 code and removed a leftover `print` call from `grades.py`.
+- Verification performed by the assistant: Ruff on `members/conmefo`, the
+  instructor W1-4, W2 and W3 tests, and the member's W2 peer tests. All passed.
+- Member review: the member still needs to read and understand the generated
+  code; automated checks are not a substitute for personal review.
