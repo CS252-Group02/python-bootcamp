@@ -6,7 +6,7 @@ from shared.contract import Task
 
 
 def parse_csv(path: str | PathLike[str]) -> list[Task]:
-    """Parse tasks from a CSV file."""
+    """Parse tasks from a CSV file, raising ValueError if it has no tasks."""
     tasks: list[Task] = []
 
     with open(path, newline="", encoding="utf-8") as csv_file:
@@ -20,5 +20,8 @@ def parse_csv(path: str | PathLike[str]) -> list[Task]:
                     deadline=date.fromisoformat(row["deadline"]),
                 )
             )
+
+    if not tasks:
+        raise ValueError("The task file is empty: no tasks found.")
 
     return tasks
