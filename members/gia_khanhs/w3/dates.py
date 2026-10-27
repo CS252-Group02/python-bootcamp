@@ -2,6 +2,7 @@ from datetime import date, timedelta
 
 
 def parse_due(text: str, today: date) -> date:
+    """Parse an ISO date, relative day count, or next weekday occurrence."""
     text = text.strip()
 
     try:

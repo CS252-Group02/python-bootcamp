@@ -2,6 +2,7 @@
 
 
 def run_length_encode(text: str) -> list[tuple[str, int]]:
+    """Return each consecutive character group and its repetition count."""
     if not text:
         return []
 

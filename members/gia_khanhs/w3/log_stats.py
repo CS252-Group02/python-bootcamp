@@ -2,7 +2,8 @@ import math
 from collections import Counter, defaultdict
 
 
-def analyse(pairs: list[tuple[str, float]]) -> dict:
+def analyse(pairs: list[tuple[str, float]]) -> dict[str, Counter[str] | dict[str, float] | str | None]:
+    """Return route counts, nearest-rank p95 values, and the slowest route."""
     counts: Counter[str] = Counter()
     latencies: dict[str, list[float]] = defaultdict(list)
     p95: dict[str, float] = {}

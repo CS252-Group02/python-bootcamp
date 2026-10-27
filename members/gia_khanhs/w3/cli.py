@@ -8,6 +8,7 @@ from ..w2.io_utils import load_tasks
 
 
 def main() -> int:
+    """Print tonight's task allocation and return the command's exit code."""
     parser = argparse.ArgumentParser(description="Plan tonight's tasks from a CSV file")
     parser.add_argument("path", type=Path, help="path to the tasks CSV")
     parser.add_argument("--hours", type=float, required=True, help="hours available tonight")

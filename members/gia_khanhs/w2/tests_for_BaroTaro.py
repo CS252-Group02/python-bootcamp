@@ -8,7 +8,8 @@ import pytest
 from members.BaroTaro.w1 import grades, rules, text_tools, timetable, translate
 
 
-def test_summary_even_number_of_scores():
+def test_summary_even_number_of_scores() -> None:
+    """Check summary statistics for an even number of scores."""
     assert grades.summary([7.5, 9, 6, 8]) == {
         "min": 6,
         "max": 9,
@@ -17,28 +18,33 @@ def test_summary_even_number_of_scores():
     }
 
 
-def test_summary_empty_scores_raise_value_error():
+def test_summary_empty_scores_raise_value_error() -> None:
+    """Check that an empty score list is rejected."""
     with pytest.raises(ValueError):
         grades.summary([])
 
 
-def test_word_count_ignores_case_and_punctuation():
+def test_word_count_ignores_case_and_punctuation() -> None:
+    """Check that word counting normalizes case and punctuation."""
     assert text_tools.word_count("Git is fun. Git is fast!") == {
         "git": 2, "is": 2, "fun": 1, "fast": 1,
     }
 
 
-def test_word_count_punctuation_only():
+def test_word_count_punctuation_only() -> None:
+    """Check that punctuation without words produces no counts."""
     assert text_tools.word_count(".,?!;: \t\n") == {} # edge case
 
 
-def test_top_k_breaks_frequency_ties_alphabetically():
+def test_top_k_breaks_frequency_ties_alphabetically() -> None:
+    """Check alphabetical ordering when word frequencies tie."""
     assert text_tools.top_k("pear apple pear banana apple banana", 2) == [
         ("apple", 2), ("banana", 2),
     ]
 
 
-def test_thesis_requires_both_credit_and_gpa_thresholds():
+def test_thesis_requires_both_credit_and_gpa_thresholds() -> None:
+    """Check both eligibility thresholds and missing credit messages."""
     assert rules.can_register_thesis(120, 2.0)
     assert not rules.can_register_thesis(119, 3.0)
     assert not rules.can_register_thesis(130, 1.99)
@@ -46,18 +52,21 @@ def test_thesis_requires_both_credit_and_gpa_thresholds():
     assert rules.missing(120, 2.0) == []
 
 
-def test_gcd_common_factor():
+def test_gcd_common_factor() -> None:
+    """Check the greatest common divisor of two positive integers."""
     assert translate.gcd(54, 24) == 6
 
 
-def test_gcd_zero_and_negative_operands():
+def test_gcd_zero_and_negative_operands() -> None:
+    """Check GCD behavior for zero and negative operands."""
     assert translate.gcd(0, 12) == 12 # edge case
     assert translate.gcd(12, 0) == 12
     assert translate.gcd(0, 0) == 0
     assert translate.gcd(-54, 24) == 6
 
 
-def test_by_day_groups_courses_and_sorts_each_day():
+def test_by_day_groups_courses_and_sorts_each_day() -> None:
+    """Check sorted daily course groups and an empty timetable."""
     schedule = [("CSC10014", "Mon"), ("MTH00003", "Tue"), ("CSC10001", "Mon")]
     assert timetable.by_day(schedule) == {
         "Mon": ["CSC10001", "CSC10014"],
