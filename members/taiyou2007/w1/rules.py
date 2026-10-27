@@ -1,9 +1,11 @@
 
 def can_register_thesis(credits: int, gpa: float) -> bool:
+    """Check whether both thesis registration thresholds are met."""
     return credits >= 120 and gpa >= 2.0
 
 
 def missing(credits: int, gpa: float) -> list[str]:
+    """Describe unmet credit and GPA requirements."""
     reasons = []
 
     if credits < 120:

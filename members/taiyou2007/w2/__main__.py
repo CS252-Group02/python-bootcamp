@@ -4,6 +4,7 @@ from .io_utils import load_tasks
 
 
 def main() -> None:
+    """Load and print the repository sample tasks."""
     repo_root = Path(__file__).resolve().parents[3]
     sample_path = repo_root / "samples" / "tasks.csv"
 
