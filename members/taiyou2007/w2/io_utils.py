@@ -9,6 +9,7 @@ from .models import Task
 
 
 def load_tasks(path: str | Path) -> list[Task]:
+    """Read tasks from CSV, reporting invalid data with its line number."""
     tasks = []
     required = ["title", "importance", "effort_h", "deadline"]
 
@@ -47,6 +48,7 @@ def load_tasks(path: str | Path) -> list[Task]:
 
 
 def save_json(tasks: list[Task], path: str | Path) -> None:
+    """Write tasks as UTF-8 JSON with ISO-formatted deadlines."""
     data = []
 
     for task in tasks:

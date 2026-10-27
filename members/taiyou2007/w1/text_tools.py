@@ -1,4 +1,5 @@
 def word_count(text: str) -> dict[str, int]:
+    """Count lowercase words, treating common punctuation as separators."""
     text = text.lower()
 
     for char in ".,!?;:":
@@ -15,6 +16,7 @@ def word_count(text: str) -> dict[str, int]:
     return counts
 
 def top_k(text: str, k: int) -> list[tuple[str, int]]:
+    """Slice words ranked by descending count and alphabetical ties."""
     counts = word_count(text)
 
     sorted_words = sorted(

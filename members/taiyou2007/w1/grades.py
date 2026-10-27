@@ -1,5 +1,6 @@
 
-def summary(scores: list[float]) -> dict:
+def summary(scores: list[float]) -> dict[str, float]:
+    """Return score statistics; reject empty input with ValueError."""
     if not scores:
         raise ValueError("Scores list cannot be empty")
 
