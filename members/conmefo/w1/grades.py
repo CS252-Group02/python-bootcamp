@@ -1,4 +1,8 @@
-def summary(scores: list[float]) -> dict:
+"""Week 1 grade statistics."""
+
+
+def summary(scores: list[float]) -> dict[str, float]:
+    """Return the min, max, mean and median of the scores, rounded to 2 places."""
     if not scores:
         raise ValueError("scores must not be empty")
 
@@ -17,4 +21,3 @@ def summary(scores: list[float]) -> dict:
         "mean": round(sum(scores) / count, 2),
         "median": round(median, 2),
     }
-print(summary([7.5, 9, 6, 8]))

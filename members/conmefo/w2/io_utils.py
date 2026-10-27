@@ -1,3 +1,5 @@
+"""Week 2 CSV and JSON helpers for tasks."""
+
 import csv
 import json
 from dataclasses import asdict
@@ -8,7 +10,8 @@ from .models import Task
 
 
 def load_tasks(path: str | Path) -> list[Task]:
-    tasks = []
+    """Read tasks from a CSV file, raising ValueError with the bad line number."""
+    tasks: list[Task] = []
     with Path(path).open(encoding="utf-8", newline="") as source:
         reader = csv.DictReader(source)
         required = {"title", "importance", "effort_h", "deadline"}
@@ -29,7 +32,8 @@ def load_tasks(path: str | Path) -> list[Task]:
 
 
 def save_json(tasks: list[Task], path: str | Path) -> None:
-    records = []
+    """Write tasks to a JSON file with ISO-formatted deadlines."""
+    records: list[dict[str, object]] = []
     for task in tasks:
         record = asdict(task)
         record["deadline"] = task.deadline.isoformat()
