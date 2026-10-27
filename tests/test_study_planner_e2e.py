@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from shared.study_planner.allocate import allocate
+from shared.study_planner.errors import InfeasiblePlan
 from shared.study_planner.parse import parse_csv
 from shared.study_planner.prioritise import prioritise
 from shared.study_planner.render import render
@@ -34,11 +35,6 @@ TODAY = date(2026, 10, 26)
             "Total: 9.50 h",
             id="all-tasks-fit",
         ),
-        pytest.param(
-            0.0,
-            "Study plan:\nNo study blocks.\nTotal: 0.00 h",
-            id="zero-hours",
-        ),
     ],
 )
 def test_csv_to_rendered_plan(hours: float, expected_output: str) -> None:
@@ -53,3 +49,11 @@ def test_csv_to_rendered_plan(hours: float, expected_output: str) -> None:
     assert sum(block.hours for block in blocks) <= hours
     assert all(0 < block.hours <= block.task.effort_h for block in blocks)
     assert output == expected_output
+
+
+def test_csv_with_zero_hours_is_infeasible() -> None:
+    """A zero-hour budget stops the pipeline with InfeasiblePlan."""
+    prioritised = prioritise(parse_csv(SAMPLE), TODAY)
+
+    with pytest.raises(InfeasiblePlan):
+        allocate(prioritised, 0.0)
