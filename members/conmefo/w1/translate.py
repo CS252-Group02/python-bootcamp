@@ -1,5 +1,11 @@
+"""Week 1 C++ to Python translation: sieve of Eratosthenes."""
+
+
 def primes_up_to(n: int) -> list[int]:
-    """Use a Python boolean list instead of C++ vector<bool> for the sieve."""
+    """Return all primes up to n with a sieve.
+
+    A Python list of booleans replaces the C++ vector<bool>.
+    """
     if n < 2:
         return []
 
