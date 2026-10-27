@@ -1,5 +1,5 @@
 def binary_search(a: list[int], key: int) -> int:
-    """Return index of key in sorted list a, or -1 if absent."""
+    """Return the index of key in a sorted list, or -1 if it is absent."""
     lo, hi = 0, len(a) - 1
     while lo <= hi:
         mid = lo + (hi - lo) // 2

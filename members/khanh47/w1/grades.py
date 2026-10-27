@@ -1,4 +1,5 @@
-def summary(scores: list[float]) -> dict:
+def summary(scores: list[float]) -> dict[str, float]:
+    """Return basic statistics for a non-empty list of scores."""
     if not scores:
         raise ValueError("scores must not be empty")
     ordered = sorted(scores)
