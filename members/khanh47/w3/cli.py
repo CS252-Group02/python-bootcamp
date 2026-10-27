@@ -2,6 +2,9 @@ import argparse
 from datetime import date
 from pathlib import Path
 
+from shared.study_planner.allocate import allocate
+from shared.study_planner.prioritise import prioritise
+
 from ..w2.io_utils import load_tasks
 
 
@@ -18,8 +21,10 @@ def main() -> int:
     except FileNotFoundError:
         parser.exit(1, f"Error: file not found: {args.csv_path}\n")
 
-    for task in tasks:
-        print(task)
+    blocks = allocate(prioritise(tasks, args.today), args.hours)
+    print(f"Tonight ({args.hours:.1f} h):")
+    for index, block in enumerate(blocks, start=1):
+        print(f"  {index}. {block.task.title} ...... {block.hours:g} h")
 
     return 0
 
