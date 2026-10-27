@@ -3,7 +3,8 @@ from pathlib import Path
 from .io_utils import load_tasks
 
 
-def main():
+def main() -> None:
+    """Load the repository's sample CSV and print its tasks."""
     repo_root = Path(__file__).resolve().parents[3]
     tasks = load_tasks(repo_root / "samples" / "tasks.csv")
 

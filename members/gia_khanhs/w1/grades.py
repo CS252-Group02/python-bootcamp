@@ -2,6 +2,7 @@ import math
 
 
 def summary(scores: list[float]) -> dict[str, float]:
+    """Return rounded score statistics; reject an empty list."""
     res: dict[str, float] = {}
     n: int = len(scores)
 
@@ -21,6 +22,5 @@ def summary(scores: list[float]) -> dict[str, float]:
 
     return res
 
-print(summary([7.5, 9, 6, 8]))
-
-# LOL
+if __name__ == "__main__":
+    print(summary([7.5, 9, 6, 8]))

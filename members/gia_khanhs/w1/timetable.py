@@ -1,7 +1,8 @@
 from collections import defaultdict
 
 
-def by_day(timetable: list[tuple[str, str]]) -> dict:
+def by_day(timetable: list[tuple[str, str]]) -> dict[str, list[str]]:
+    """Group courses by day and sort each day's course names."""
     res: dict[str, list[str]] = defaultdict(list[str])
 
     for course, day in timetable:

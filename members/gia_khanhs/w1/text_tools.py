@@ -3,6 +3,7 @@ from collections import defaultdict
 
 
 def word_count(text: str) -> dict[str, int]:
+    """Count lowercase words after removing punctuation."""
     res: dict[str, int] = defaultdict(int)
 
     text = "".join([char
@@ -15,6 +16,7 @@ def word_count(text: str) -> dict[str, int]:
     return dict(res)
 
 def top_k(text: str, k: int) -> list[tuple[str, int]]:
+    """Return the k most frequent words, keeping encounter order for ties."""
     word_cnt_dict: dict[str, int] = word_count(text)
     word_cnt_list: list[tuple[str, int]] = [(key, val)
                                             for key, val in word_cnt_dict.items()]
