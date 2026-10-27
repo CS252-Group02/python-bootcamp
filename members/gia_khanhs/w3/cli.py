@@ -1,7 +1,7 @@
 import argparse
 import math
 import sys
-from datetime import date
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 from ..w2.io_utils import load_tasks
@@ -11,9 +11,11 @@ def main() -> int:
     """Print tonight's task allocation and return the command's exit code."""
     parser = argparse.ArgumentParser(description="Plan tonight's tasks from a CSV file")
     parser.add_argument("path", type=Path, help="path to the tasks CSV")
-    parser.add_argument("--hours", type=float, required=True, help="hours available tonight")
+    parser.add_argument(
+        "--hours", type=float, required=True, help="hours available tonight",
+    )
     # Tonight's plan uses the user's local calendar date.
-    today: date = date.today()  # noqa: DTZ011
+    today: date = datetime.now(tz=UTC).astimezone().date()
     parser.add_argument("--today", type=date.fromisoformat, default=today,
                         help="today's date as YYYY-MM-DD (default: today)")
     args = parser.parse_args()
